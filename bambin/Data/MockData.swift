@@ -180,16 +180,16 @@ struct MockData {
         )
     ]
     
-    static let mamanId = UUID()
-    static let papaId = UUID()
-    static let filleAineeId = UUID()
-    static let garconId = UUID()
-    static let filleCadetteId = UUID()
+    static let motherId = UUID()
+    static let fatherId = UUID()
+    static let bigGirlId = UUID()
+    static let boyId = UUID()
+    static let littleGirlId = UUID()
     
     static let family: [User] = [
         User(
-            id: mamanId,
-            name: "Aurélie",
+            id: motherId,
+            name: "Kelly",
             age: 38,
             avatarName: "Avatar1",
             totalTime: 180,
@@ -198,8 +198,8 @@ struct MockData {
             favoriteActivities: [activities[0].id, activities[5].id]
         ),
         User(
-            id: papaId,
-            name: "Thomas",
+            id: fatherId,
+            name: "Fabian",
             age: 40,
             avatarName: "Avatar2",
             totalTime: 210,
@@ -208,8 +208,8 @@ struct MockData {
             favoriteActivities: [activities[1].id]
         ),
         User(
-            id: filleAineeId,
-            name: "Chloé",
+            id: bigGirlId,
+            name: "Imane",
             age: 11,
             avatarName: "Avatar3",
             totalTime: 120,
@@ -218,8 +218,8 @@ struct MockData {
             favoriteActivities: [activities[7].id]
         ),
         User(
-            id: garconId,
-            name: "Lucas",
+            id: boyId,
+            name: "Alexis",
             age: 6,
             avatarName: "Avatar4",
             totalTime: 90,
@@ -228,8 +228,8 @@ struct MockData {
             favoriteActivities: [activities[1].id, activities[3].id]
         ),
         User(
-            id: filleCadetteId,
-            name: "Emma",
+            id: littleGirlId,
+            name: "Sridja",
             age: 7,
             avatarName: "Avatar5",
             totalTime: 95,
@@ -240,8 +240,8 @@ struct MockData {
     ]
     
     static let userLogs: [UserLog] = [
-        UserLog(userID: mamanId, activityID: activities[0].id, date: Date().addingTimeInterval(-86400), duration: 16),
-        UserLog(userID: papaId, activityID: activities[1].id, date: Date().addingTimeInterval(-172800), duration: 60),
-        UserLog(userID: garconId, activityID: activities[1].id, date: Date().addingTimeInterval(-172800), duration: 60)
+        UserLog(userID: motherId, activityID: activities[0].id, date: Date().addingTimeInterval(-86400), duration: 16),
+        UserLog(userID: fatherId, activityID: activities[1].id, date: Date().addingTimeInterval(-172800), duration: 60),
+        UserLog(userID: boyId, activityID: activities[1].id, date: Date().addingTimeInterval(-172800), duration: 60)
     ]
 }
