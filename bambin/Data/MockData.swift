@@ -116,7 +116,7 @@ struct MockData {
         Activity(
             actionText: "Cuisine des",
             productName: "CRÊPES",
-            imageName: "crepes_photo",
+            imageName: "crepes",
             gallery: ["crepes_1", "crepes_2"],
             duration: 45,
             likes: 24,
@@ -129,7 +129,7 @@ struct MockData {
         Activity(
             actionText: "Cherche le",
             productName: "TRÉSOR",
-            imageName: "nature_run",
+            imageName: "tresor",
             gallery: ["garden_map", "kids_running"],
             duration: 60,
             likes: 42,
@@ -142,7 +142,7 @@ struct MockData {
         Activity(
             actionText: "Crée un",
             productName: "HERBIER",
-            imageName: "herbier_img",
+            imageName: "herbier",
             gallery: ["leaf_1", "leaf_2"],
             duration: 90,
             likes: 15,
@@ -155,7 +155,7 @@ struct MockData {
         Activity(
             actionText: "Fais de la",
             productName: "PEINTURE",
-            imageName: "paint_fingers",
+            imageName: "peinture",
             gallery: ["paint_1"],
             duration: 30,
             likes: 50,
@@ -168,7 +168,7 @@ struct MockData {
         Activity(
             actionText: "Fabrique un",
             productName: "VOLCAN",
-            imageName: "volcano_exp",
+            imageName: "volcan",
             gallery: ["volcano_1", "volcano_2"],
             duration: 40,
             likes: 88,

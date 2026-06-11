@@ -239,7 +239,7 @@ struct AnimatedButtonStyle: ButtonStyle {
     }
 }
 
-#Preview {
+#Preview(traits: .bambin) {
     TabView {
 
         Tab("Activités", systemImage: "books.vertical") {
@@ -260,7 +260,7 @@ struct AnimatedButtonStyle: ButtonStyle {
     }
 }
 
-#Preview {
+#Preview(traits: .bambin) {
     ZStack {
         Color.red.opacity(0.2).ignoresSafeArea()
         ActivityCardView(activity: MockData.activities[0])
