@@ -14,6 +14,7 @@ struct Activity: Identifiable, Hashable, Codable {
     let productName: String
     let imageName: String
     let gallery: [String]
+    let description: String
     let duration: Int
     var likes: Int
     

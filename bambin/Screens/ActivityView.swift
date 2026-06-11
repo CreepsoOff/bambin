@@ -235,14 +235,188 @@ struct ActivityDetailView: View {
 
     let activity: Activity
 
+    @State private var isMaterialsVisible: Bool = false
+
+    @State private var isFavorite: Bool = false
+    @State private var isLater: Bool = false
+    @State private var isDone: Bool = false
+
+    var cardBgColor: Color {
+        switch activity.category {
+        case .kitchen:
+            Color.yellow
+        case .sport:
+            Color.red
+        case .nature:
+            Color.green
+        case .drawing:
+            Color.orange
+        case .sciences:
+            Color.blue
+        }
+    }
+
+    var activityLevel: String {
+        switch activity.difficulty {
+        case 1:
+            "Facile"
+        case 2:
+            "Intermédiaire"
+        case 3:
+            "Difficile"
+        default:
+            "Normal"
+        }
+    }
+
     var body: some View {
 
-        VStack {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 30) {
 
-            Text("\(activity.actionText) \(activity.productName)")
+                // Presentation image
+                ZStack {
+                    Image(activity.imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .padding()
 
+                    Text(activity.category.rawValue)
+                        .font(.subheadline)
+                        .bold()
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(
+                            Color.white
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 25))
+                        .frame(
+                            maxWidth: .infinity,
+                            maxHeight: .infinity,
+                            alignment: .bottomLeading
+                        )
+                        .padding(5)
+                        .opacity(0.6)
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 200)
+                .background(
+                    cardBgColor
+                )
+                .clipShape(
+                    RoundedRectangle(cornerRadius: 20)
+                )
+                .shadow(radius: 5, y: 6)
+
+                // Title and description
+                Text("\(activity.actionText) \(activity.productName)")
+                    .font(.title)
+                    .bold()
+                Text(activity.description)
+
+                // More informations
+                VStack(spacing: 20) {
+                    HStack {
+                        Label {
+                            Text("Matériel nécessaire")
+
+                        } icon: {
+                            Image(systemName: "shippingbox.fill")
+                                .foregroundColor(.orange)
+                                .font(.title3)
+                        }
+
+                        Spacer()
+
+                        Button(
+                            "Voir",
+                            systemImage: "chevron.right",
+                            action: {
+                                isMaterialsVisible.toggle()
+                            }
+                        )
+                        .labelStyle(.iconOnly)
+                    }
+                    Divider()
+                    HStack {
+                        Label {
+                            Text("Nombre de personne")
+
+                        } icon: {
+                            Image(systemName: "person.2.fill")
+                                .foregroundColor(.red)
+                                .font(.title3)
+                        }
+                        Spacer()
+                        Text("\(activity.numberOfParticipants)")
+                    }
+                    Divider()
+                    HStack {
+                        Label {
+                            Text("Niveau de difficulté")
+
+                        } icon: {
+                            Image(systemName: "chart.bar.fill")
+                                .foregroundColor(.green)
+                                .font(.title3)
+                        }
+                        Spacer()
+                        Text(activityLevel)
+                    }
+                    Divider()
+                    HStack {
+                        Label {
+                            Text("Durée estimée")
+
+                        } icon: {
+                            Image(systemName: "timer")
+                                .foregroundColor(.blue)
+                                .font(.title3)
+                        }
+                        Spacer()
+                        Text("\(activity.duration) minutes")
+                    }
+                }
+                .padding(.vertical, 20)
+                .padding(.horizontal, 15)
+                .background(
+                    Color.white
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 25))
+
+                Button(
+                    "Valider l'activité",
+                    systemImage: "checkmark.circle.fill"
+                ) {
+                    isDone.toggle()
+                }
+                .frame(maxWidth: .infinity)
+                .buttonStyle(.glassProminent)
+                .controlSize(.large)
+
+            }
+            .padding()
         }
+        .background(Color.gray.opacity(0.2))
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    isFavorite.toggle()
+                } label: {
+                    Image(systemName: "heart.fill")
+                }
+                .tint(isFavorite ? .red : .gray)
+            }
 
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    isLater.toggle()
+                } label: {
+                    Image(systemName: "clock.fill")
+                }
+                .tint(isLater ? .orange : .gray)
+            }
+        }
     }
 }
 
