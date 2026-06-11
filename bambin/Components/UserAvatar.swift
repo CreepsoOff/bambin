@@ -20,5 +20,5 @@ struct UserAvatar: View {
 }
 
 #Preview {
-    UserAvatar(user: MockData.family[1])
+    UserAvatar(user: MockData.family.users[1])
 }
