@@ -18,12 +18,18 @@ struct ContentView: View {
             }
 
             Tab("Stats", systemImage: "chart.line.text.clipboard") {
+                NavigationStack {
+                    StatisticsView()
+                }
             }
             Tab("Infos", systemImage: "info.bubble") {
             }
             Tab("Famille", systemImage: "person.3") {
+                NavigationStack {
+                    FamilyView()
+                }
             }
-            Tab("Famille", systemImage: "magnifyingglass", role: .search) {
+            Tab("Search", systemImage: "magnifyingglass", role: .search) {
 
             }
         }

@@ -70,22 +70,14 @@ struct ActivityView: View {
 
                 ForEach(filteredActivities) { activity in
 
-                    Button {
-
-                        print(
-                            "Tapped",
-                            activity.actionText,
-                            activity.productName
-                        )
-                        
+                    NavigationLink {
+                        ActivityDetailView(activity: activity)
                     } label: {
-                        
                         ActivityCardView(activity: activity)
-                        
                     }
+
                     .buttonStyle(AnimatedButtonStyle())
-                    
-                    
+
                     //                        .overlay {
                     //                            GeometryReader { proxy in
                     //                                Text(
@@ -239,6 +231,21 @@ struct AnimatedButtonStyle: ButtonStyle {
     }
 }
 
+struct ActivityDetailView: View {
+
+    let activity: Activity
+
+    var body: some View {
+
+        VStack {
+
+            Text("\(activity.actionText) \(activity.productName)")
+
+        }
+
+    }
+}
+
 #Preview(traits: .bambin) {
     TabView {
 
@@ -264,5 +271,11 @@ struct AnimatedButtonStyle: ButtonStyle {
     ZStack {
         Color.red.opacity(0.2).ignoresSafeArea()
         ActivityCardView(activity: MockData.activities[0])
+    }
+}
+
+#Preview(traits: .bambin) {
+    NavigationStack {
+        ActivityDetailView(activity: MockData.activities[0])
     }
 }
