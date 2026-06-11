@@ -186,7 +186,8 @@ struct MockData {
     static let boyId = UUID()
     static let littleGirlId = UUID()
     
-    static let family: [User] = [
+    
+    static let familyUsers: [User] = [
         User(
             id: motherId,
             name: "Kelly",
@@ -238,6 +239,8 @@ struct MockData {
             favoriteActivities: [activities[2].id, activities[4].id]
         )
     ]
+    
+    static let family: Family = Family(name: "Famille Simplon", users: familyUsers)
     
     static let userLogs: [UserLog] = [
         UserLog(userID: motherId, activityID: activities[0].id, date: Date().addingTimeInterval(-86400), duration: 16),
