@@ -443,6 +443,22 @@ struct ActivityDetailView: View {
             .presentationDetents([.medium, .large])
             .presentationDragIndicator(.visible)
         }
+        .sheet(isPresented: $isDone) {
+            VStack(spacing: 20){
+                Image(activity.imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
+                    .padding(50)
+
+                Text("Bravo !")
+                    .font(.title)
+                Text("Vous avez terminé l'activité!")
+                    .font(.title2)
+            }
+            .presentationDetents([.large])
+            .presentationDragIndicator(.visible)
+        }
     }
 }
 
