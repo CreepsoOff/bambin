@@ -14,24 +14,25 @@ struct ActivityView: View {
 
     var counter: Int = 1
 
+    // Create array of all family members interests
+    // Use of Set to remove duplicates
+    let familyInterests: Set<Interet> = Set(
+        MockData.familyUsers.flatMap { $0.interests }
+    )
+
     // Filter with the category picker
     var filteredActivitiesPicker: [Activity] {
 
         switch selectedFilter {
+
         case "Pour vous":
-            activities
-        // Union tous les tableaux d'interets de la famille
-        // Prendre les deux premriers les plus aimer
-        // Filtrer les résultats avec les 2 premiers
+            activities.filter { familyInterests.contains($0.category) }
 
         case "Tendance":
-            activities
-                .filter { $0.likes > 100 && $0.difficulty >= 2 }
+            activities.filter { $0.likes > 100 && $0.difficulty >= 2 }
 
         case "Coup de ❤️":
-            activities.sorted { activityA, activityB in
-                activityA.likes > activityB.likes
-            }
+            activities.sorted { $0.likes > $1.likes }
 
         case "Tous":
             activities
@@ -444,7 +445,7 @@ struct ActivityDetailView: View {
             .presentationDragIndicator(.visible)
         }
         .sheet(isPresented: $isDone) {
-            VStack(spacing: 20){
+            VStack(spacing: 20) {
                 Image(activity.imageName)
                     .resizable()
                     .scaledToFit()
