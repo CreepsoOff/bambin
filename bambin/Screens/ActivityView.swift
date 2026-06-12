@@ -10,10 +10,12 @@ import SwiftUI
 struct ActivityView: View {
 
     @State private var activities: [Activity] = MockData.activities
+    @Binding var search: String
 
     var counter: Int = 1
 
-    var filteredActivities: [Activity] {
+    // Filter with the category picker
+    var filteredActivitiesPicker: [Activity] {
 
         switch selectedFilter {
         case "Pour vous":
@@ -23,7 +25,8 @@ struct ActivityView: View {
         // Filtrer les résultats avec les 2 premiers
 
         case "Tendance":
-            activities.filter { $0.likes > 100 && $0.difficulty >= 2 }
+            activities
+                .filter { $0.likes > 100 && $0.difficulty >= 2 }
 
         case "Coup de ❤️":
             activities.sorted { activityA, activityB in
@@ -38,25 +41,31 @@ struct ActivityView: View {
         }
     }
 
+    // Filter with the search
+    var filteredActivities: [Activity] {
+        filteredActivitiesPicker
+            .filter {
+                search.isEmpty
+                    || $0.productName.lowercased().contains(
+                        search.lowercased()
+                    )
+            }
+    }
+
     @State private var selectedFilter: String = "Pour vous"
     let searchFilters: [String] = [
         "Pour vous", "Tendance", "Coup de ❤️", "Tous",
     ]
 
     let columns: [GridItem] = [
-        //        GridItem(.adaptive(minimum: 100, maximum: 110)),
-        //        GridItem(.adaptive(minimum: 100, maximum: 110)),
         GridItem(.flexible())
-        //        GridItem(.flexible()),
-        //        GridItem(.flexible(), spacing: 20),
-        //        GridItem(.flexible(), spacing: 20),
     ]
 
     var body: some View {
         ScrollView {
-            Text("Bambin")
-                .font(.largeTitle)
-                .bold()
+            //            Text("Bambin")
+            //                .font(.largeTitle)
+            //                .bold()
 
             Picker("Search filter", selection: $selectedFilter) {
                 ForEach(searchFilters, id: \.self) { searchFilter in
@@ -64,7 +73,7 @@ struct ActivityView: View {
                 }
             }
             .pickerStyle(.segmented)
-            .padding(.horizontal)
+            .padding([.top, .horizontal])
 
             LazyVGrid(columns: columns, spacing: 25) {
 
@@ -102,6 +111,8 @@ struct ActivityView: View {
             .frame(maxWidth: .infinity)
         }
         .background(Color.gray.opacity(0.2))
+        .navigationTitle("Liste d'activités")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 
@@ -188,7 +199,7 @@ struct ActivityCardView: View {
                         Text(activity.actionText)
                             .font(.title)
 
-                        Text(activity.productName)
+                        Text(activity.productName.uppercased())
                             .font(.largeTitle)
                             .bold()
                     }
@@ -436,11 +447,14 @@ struct ActivityDetailView: View {
 }
 
 #Preview(traits: .bambin) {
+
+    @Previewable @State var searchText: String = ""
+
     TabView {
 
         Tab("Activités", systemImage: "books.vertical") {
             NavigationStack {
-                ActivityView()
+                ActivityView(search: $searchText)
             }
         }
 
@@ -450,8 +464,15 @@ struct ActivityDetailView: View {
         }
         Tab("Famille", systemImage: "person.3") {
         }
-        Tab("Famille", systemImage: "magnifyingglass", role: .search) {
-
+        Tab("Search", systemImage: "magnifyingglass", role: .search) {
+            NavigationStack {
+                ActivityView(search: $searchText)
+            }
+            .searchable(
+                text: $searchText,
+                placement: .automatic,
+                prompt: "Rechercher une activité"
+            )
         }
     }
 }
