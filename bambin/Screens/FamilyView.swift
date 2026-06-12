@@ -11,7 +11,6 @@ struct FamilyView: View {
     
     
     @State private var family: Family = MockData.family
-    @State private var isModifying = false
     @State private var isSelectionMode = false
     @State private var selectedUserIDs: Set<UUID> = []
     @State private var newFamilyName = ""
@@ -56,32 +55,6 @@ struct FamilyView: View {
                             Text(family.name)
                                 .font(.largeTitle)
                                 .bold()
-                            Button {
-                                newFamilyName = family.name
-                                isModifying = true
-                            } label: {
-                                Image(systemName: "pencil")
-                                    .font(.body)
-                                    .foregroundStyle(.black)
-                                    .padding(6)
-                                    .glassEffect(.regular.tint(.lavender).interactive(), in: .circle)
-                            }
-                            .buttonStyle(.plain)
-                            .alert("Modifier le nom", isPresented: $isModifying) {
-                                TextField("Nom de la famille", text: $newFamilyName)
-                                    .font(.system(.body, design: .rounded))
-                                
-                                let cleanedName = newFamilyName.trimmingCharacters(in: .whitespaces)
-                                Button("Valider", role: .confirm) {
-                                    family.name = newFamilyName
-                                }
-                                .disabled(cleanedName.isEmpty)
-                                
-                                Button("Annuler", role: .cancel) {}
-                            } message: {
-                                Text("Entrez le nouveau nom pour votre famille.")
-                            }
-                            
                         }
                         Spacer()
                     }
@@ -96,7 +69,7 @@ struct FamilyView: View {
             Section {
                 ForEach(family.users) { user in
                     NavigationLink {
-                        DetailedUserView(user: user)
+                        DetailedUserView(family: $family, userID: user.id)
                     } label: {
                         FamilyUserRow(user: user)
                     }
@@ -116,16 +89,33 @@ struct FamilyView: View {
             .listRowSeparator(.hidden, edges: .top)
             
             Section {
-                Label("Mes favoris", systemImage: "star.fill")
-                    .foregroundStyle(.yellow)
-                Label("Mes statistiques", systemImage: "chart.pie.fill")
-                    .foregroundStyle(.blue)
-                Label("Mes activités", systemImage: "apps.iphone")
-                    .foregroundStyle(.purple)
-                    .listRowSeparator(.visible)
+                NavigationLink {
+                    FamilyFavoritesView(family: family)
+                } label: {
+                    Label("Mes favoris", systemImage: "star.fill")
+                        .foregroundStyle(.yellow)
+                }
                 
-                Label("Réglages", systemImage: "gearshape.fill")
-                    .foregroundStyle(.gray)
+                NavigationLink {
+                    FamilyStatisticsView(family: family)
+                } label: {
+                    Label("Mes statistiques", systemImage: "chart.pie.fill")
+                        .foregroundStyle(.blue)
+                }
+                
+                NavigationLink {
+                    FamilyActivitiesView(family: family)
+                } label: {
+                    Label("Mes activités", systemImage: "apps.iphone")
+                        .foregroundStyle(.purple)
+                }
+                
+                NavigationLink {
+                    FamilySettingsView(family: $family)
+                } label: {
+                    Label("Réglages", systemImage: "gearshape.fill")
+                        .foregroundStyle(.gray)
+                }
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Color.white)

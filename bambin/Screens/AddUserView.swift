@@ -112,6 +112,17 @@ struct AddUserView: View {
                 }
 
             }
+            .background {
+                ZStack {
+                    Color.lavender
+                    Image("backgroundPattern")
+                        .resizable(resizingMode: .tile)
+                        .blendMode(.multiply)
+                        .opacity(0.4)
+                }
+                .ignoresSafeArea()
+            }
+            .scrollContentBackground(.hidden)
             .sheet(isPresented: $showInteretsSheet) {
                 NavigationStack {
                     List {
