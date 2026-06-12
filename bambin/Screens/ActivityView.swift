@@ -417,6 +417,21 @@ struct ActivityDetailView: View {
                 .tint(isLater ? .orange : .gray)
             }
         }
+        .sheet(isPresented: $isMaterialsVisible) {
+            NavigationStack {
+                List {
+                    ForEach(activity.materialsNeeded.indices, id: \.self) {
+                        index in
+                        Label(
+                            activity.materialsNeeded[index],
+                            systemImage: "\(index + 1).circle"
+                        )
+                    }
+                }
+            }
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
+        }
     }
 }
 
