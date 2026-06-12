@@ -11,7 +11,10 @@ struct User: Identifiable, Hashable, Codable {
     var id = UUID()
     var name: String
     var age: Int
+    
     var avatarName: String
+    var avatarImageData: Data? = nil
+    
     var totalTime: Int
     var activities: [Activity]
     var interests: [Interet]
