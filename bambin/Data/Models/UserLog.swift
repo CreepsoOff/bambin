@@ -16,18 +16,16 @@ struct UserLog: Identifiable, Hashable, Codable {
     let date: Date
     let duration: Int
     
-    enum TimePeriod : CaseIterable {
+    // enum interne (type personnalisé)
+    // CaseIterable : permet de parcourir toute les valeurs dans le picker
+    enum TimePeriod : String, CaseIterable {
         case day
         case week
         case month
         case year
     }
     
-// A confirmer
-    enum Top : CaseIterable {
-        case one
-        case two
-        case three
-    }
-    
 }
+
+
+
