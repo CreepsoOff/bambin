@@ -257,8 +257,90 @@ struct MockData {
     static let family: Family = Family(name: "Famille Simplon", users: familyUsers)
     
     static let userLogs: [UserLog] = [
-        UserLog(userID: motherId, activityID: activities[0].id, date: Date().addingTimeInterval(-86400), duration: 16),
-        UserLog(userID: fatherId, activityID: activities[1].id, date: Date().addingTimeInterval(-172800), duration: 60),
-        UserLog(userID: boyId, activityID: activities[1].id, date: Date().addingTimeInterval(-172800), duration: 60)
+        
+        // TODAY (3 activités)
+        
+        UserLog(
+            userID: motherId,
+            activityID: activities[0].id,
+            date: Date(),
+            duration: 30
+        ),
+        
+        UserLog(
+            userID: motherId,
+            activityID: activities[1].id,
+            date: Date(),
+            duration: 45
+        ),
+        
+        UserLog(
+            userID: motherId,
+            activityID: activities[2].id,
+            date: Date(),
+            duration: 25
+        ),
+        
+        // THIS WEEK (différentes activités)
+        
+        UserLog(
+            userID: motherId,
+            activityID: activities[3].id,
+            date: Date().addingTimeInterval(-2 * 86400),
+            duration: 60
+        ),
+        
+        UserLog(
+            userID: motherId,
+            activityID: activities[4].id,
+            date: Date().addingTimeInterval(-3 * 86400),
+            duration: 40
+        ),
+        
+        UserLog(
+            userID: motherId,
+            activityID: activities[5].id,
+            date: Date().addingTimeInterval(-4 * 86400),
+            duration: 35
+        ),
+        
+        // THIS MONTH (bonus variété)
+        
+        UserLog(
+            userID: motherId,
+            activityID: activities[6].id,
+            date: Date().addingTimeInterval(-10 * 86400),
+            duration: 90
+        ),
+        
+        UserLog(
+            userID: motherId,
+            activityID: activities[7].id,
+            date: Date().addingTimeInterval(-12 * 86400),
+            duration: 40
+        ),
+        
+        UserLog(
+            userID: motherId,
+            activityID: activities[8].id,
+            date: Date().addingTimeInterval(-14 * 86400),
+            duration: 35
+        ),
+        
+        // OLD DATA (year)
+        
+        UserLog(
+            userID: motherId,
+            activityID: activities[1].id,
+            date: Date().addingTimeInterval(-45 * 86400),
+            duration: 120
+        ),
+        
+        UserLog(
+            userID: motherId,
+            activityID: activities[2].id,
+            date: Date().addingTimeInterval(-90 * 86400),
+            duration: 75
+        )
     ]
 }
