@@ -97,7 +97,11 @@ struct FamilyView: View {
                 }
                 
                 NavigationLink {
-                    FamilyStatisticsView(family: family)
+                        StatisticsView(
+                            user: MockData.familyUsers[0],
+                            activities: MockData.activities,
+                            userLogs: MockData.userLogs
+                        )
                 } label: {
                     Label("Mes statistiques", systemImage: "chart.pie.fill")
                         .foregroundStyle(.blue)

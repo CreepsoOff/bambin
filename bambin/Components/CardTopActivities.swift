@@ -121,6 +121,7 @@ struct CardTopActivities: View {
             productName: "OEUF",
             imageName: "egg",
             gallery: ["egg_gal1", "egg_gal2"],
+            description: "Prépare une délicieuse pizza maison en famille : étale la pâte, ajoute la sauce tomate, le fromage puis les garnitures préférées. Une activité simple et gourmande pour apprendre à cuisiner, partager les tâches et savourer le résultat tous ensemble autour d'un repas convivial.",
             duration: 10,
             likes: 99,
             emplacements: [.home, .inside],

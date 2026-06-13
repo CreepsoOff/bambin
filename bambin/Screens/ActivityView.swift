@@ -63,53 +63,65 @@ struct ActivityView: View {
     ]
 
     var body: some View {
-        ScrollView {
-            //            Text("Bambin")
-            //                .font(.largeTitle)
-            //                .bold()
-
-            Picker("Search filter", selection: $selectedFilter) {
-                ForEach(searchFilters, id: \.self) { searchFilter in
-                    Text(searchFilter)
-                }
-            }
-            .pickerStyle(.segmented)
-            .padding([.top, .horizontal])
-
-            LazyVGrid(columns: columns, spacing: 25) {
-
-                ForEach(filteredActivities) { activity in
-
-                    NavigationLink {
-                        ActivityDetailView(activity: activity)
-                    } label: {
-                        ActivityCardView(activity: activity)
+        
+        VStack {
+            ScrollView {
+                //            Text("Bambin")
+                //                .font(.largeTitle)
+                //                .bold()
+                
+                Picker("Search filter", selection: $selectedFilter) {
+                    ForEach(searchFilters, id: \.self) { searchFilter in
+                        Text(searchFilter)
                     }
-
-                    .buttonStyle(AnimatedButtonStyle())
-
-                    //                        .overlay {
-                    //                            GeometryReader { proxy in
-                    //                                Text(
-                    //                                    "\(Int(proxy.size.width)) x \(Int(proxy.size.height))"
-                    //                                )
-                    //                                .font(.caption)
-                    //                                .foregroundStyle(.white)
-                    //                                .padding(4)
-                    //                                .background(.purple)
-                    //                                .fixedSize()
-                    //                                .frame(
-                    //                                    width: proxy.size.width,
-                    //                                    height: proxy.size.height
-                    //                                )
-                    //                            }
-                    //                        }
-
                 }
-
+                .pickerStyle(.segmented)
+                .padding([.top, .horizontal])
+                
+                LazyVGrid(columns: columns, spacing: 25) {
+                    
+                    ForEach(filteredActivities) { activity in
+                        
+                        NavigationLink {
+                            ActivityDetailView(activity: activity)
+                        } label: {
+                            ActivityCardView(activity: activity)
+                        }
+                        
+                        .buttonStyle(AnimatedButtonStyle())
+                        
+                        //                        .overlay {
+                        //                            GeometryReader { proxy in
+                        //                                Text(
+                        //                                    "\(Int(proxy.size.width)) x \(Int(proxy.size.height))"
+                        //                                )
+                        //                                .font(.caption)
+                        //                                .foregroundStyle(.white)
+                        //                                .padding(4)
+                        //                                .background(.purple)
+                        //                                .fixedSize()
+                        //                                .frame(
+                        //                                    width: proxy.size.width,
+                        //                                    height: proxy.size.height
+                        //                                )
+                        //                            }
+                        //                        }
+                        
+                    }
+                    
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+            }   .background {
+                ZStack {
+                    Color.lavender
+                    Image("backgroundPattern")
+                        .resizable(resizingMode: .tile)
+                        .blendMode(.multiply)
+                        .opacity(0.4)
+                }
+                .ignoresSafeArea()
             }
-            .padding()
-            .frame(maxWidth: .infinity)
         }
         .background(Color.gray.opacity(0.2))
         .navigationTitle("Liste d'activités")

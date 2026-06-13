@@ -369,14 +369,25 @@ struct StatisticsView: View {
                     UserAvatar(user: user)
 
                     VStack(alignment: .leading) {
-                        Text("Hello 👋")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                        
+                        HStack {
+                            
+                            Text("Hello")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            
+                            
+                            Image(systemName: "hand.wave.fill")
+                                .font(.system(size: 16))
+                                .foregroundStyle(.yellow)
+                        }
+                        
 
                         // nom utilisateur
                         Text(user.name)
                             .font(.title2)
                             .fontWeight(.bold)
+                            .padding(.top, 2)
                     }
 
                     Spacer()

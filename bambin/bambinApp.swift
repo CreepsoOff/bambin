@@ -38,8 +38,9 @@ struct bambinApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .fontDesign(.rounded)
+                   ContentView()
+                       .fontDesign(.rounded)
         }
     }
 }
+
